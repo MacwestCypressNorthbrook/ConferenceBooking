@@ -5,22 +5,7 @@ One shared open space for official gatherings. **Anyone can book it without an a
 **Stack:** Next.js 16 (App Router), React 19, Tailwind CSS 4, Supabase (Postgres + Auth), Resend or any SMTP server, Bun.
 **Design:** "Executive Precision" from the Stitch project. See [`designs/`](designs/).
 
-## Set up
 
-1. **Create a Supabase project** at [supabase.com/dashboard](https://supabase.com/dashboard).
-2. **Run both migrations in order** in the SQL Editor:
-   [`20260930000000_init.sql`](supabase/migrations/20260930000000_init.sql), then [`20260930120000_public_booking.sql`](supabase/migrations/20260930120000_public_booking.sql).
-   (With the CLI: `supabase link` then `supabase db push`.)
-3. **Environment:** `cp .env.example .env.local`, then fill in:
-   - `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and **`SUPABASE_SECRET_KEY`** (*Project Settings → API Keys*). The secret key stays on the server. The public page needs it because anonymous visitors get no direct database access.
-   - `APP_URL`: the public address, used in email links.
-   - **Email:** either `RESEND_API_KEY`, or `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASSWORD`. Also set `EMAIL_FROM` to an address on a domain your provider has verified.
-4. **Lock down sign-ups:** in *Authentication → Sign In / Providers*, turn off **Allow new users to sign up**. Admins are added from inside the app.
-5. **Create the first admin:** *Authentication → Users → Add user* (tick *Auto Confirm User*). The first account ever created becomes the admin.
-6. `bun install && bun dev`, then open `/admin`. Add further admins in **Space settings → Admins**; they get an emailed sign-in link.
-7. *(Optional)* Run [`supabase/seed.sql`](supabase/seed.sql) for a fortnight of demo bookings.
-
-Then set the space's real name, capacity, hours, **timezone** (defaults to `Africa/Lagos`) and, if you like, **allowed email domains** in Space settings.
 
 ## How it works
 

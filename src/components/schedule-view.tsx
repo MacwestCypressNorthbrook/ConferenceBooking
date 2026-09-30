@@ -72,8 +72,11 @@ export async function ScheduleView({
         }
       />
 
-      <SpaceStatus todayBookings={todayBookings} variant="card" />
-      <FreeWindows upcoming={upcoming} />
+      {/* Side by side on wide screens so the week grid sits higher on the page. */}
+      <div className="grid gap-4 xl:grid-cols-[minmax(420px,520px)_minmax(0,1fr)] xl:items-center">
+        <SpaceStatus todayBookings={todayBookings} variant="card" />
+        <FreeWindows upcoming={upcoming} />
+      </div>
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-fg-muted" aria-label="Legend">
         <span className="flex items-center gap-1.5">

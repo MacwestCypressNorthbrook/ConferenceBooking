@@ -14,7 +14,7 @@ export function PublicHeader({ todayBookings }: { todayBookings: Slot[] }) {
   return (
     <>
       <header className="sticky top-0 z-30 border-b border-line bg-surface/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-14 max-w-7xl items-center gap-3 px-4 sm:px-6">
+        <div className="flex h-14 items-center gap-3 px-4 sm:px-6 lg:px-8 xl:px-10">
           <span className="grid size-8 shrink-0 place-items-center rounded-md bg-primary text-on-primary">
             <CalendarDays className="size-4" aria-hidden />
           </span>
@@ -47,7 +47,7 @@ export function PublicHeader({ todayBookings }: { todayBookings: Slot[] }) {
       </header>
 
       <div className="border-b border-line bg-surface">
-        <dl className="mx-auto flex max-w-7xl flex-wrap gap-x-5 gap-y-1 px-4 py-2 text-xs text-fg-muted sm:px-6">
+        <dl className="flex flex-wrap gap-x-5 gap-y-1 py-2 text-xs text-fg-muted px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="flex items-center gap-1.5">
             <Users className="size-3.5 text-fg-subtle" aria-hidden />
             <dt className="sr-only">Capacity</dt>
@@ -75,7 +75,7 @@ export function PublicHeader({ todayBookings }: { todayBookings: Slot[] }) {
 
       {viewer && (
         <div className="border-b border-primary-line bg-primary-soft">
-          <p className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-2 gap-y-1 px-4 py-2 text-[13px] text-fg sm:px-6">
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1 py-2 text-[13px] text-fg px-4 sm:px-6 lg:px-8 xl:px-10">
             <ShieldCheck className="size-4 shrink-0 text-accent" aria-hidden />
             You&apos;re signed in as an admin, so bookings you make here are <strong>confirmed instantly</strong> and skip
             Approvals.

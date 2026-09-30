@@ -19,7 +19,7 @@ export default async function PublicLayout({ children }: LayoutProps<"/">) {
     <BookingProvider settings={settings} viewer={admin} serverNow={now}>
       <IntervalRefresher />
       <PublicHeader todayBookings={todayBookings} />
-      <main className="mx-auto max-w-7xl px-4 pt-6 pb-28 sm:px-6 sm:pb-12">{children}</main>
+      <main className="px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 pb-28 sm:pb-12">{children}</main>
     </BookingProvider>
   );
 }

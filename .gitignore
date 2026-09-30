@@ -44,3 +44,11 @@ next-env.d.ts
 
 # local MCP config (contains the Stitch API key)
 .agents/mcp_config.json
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example

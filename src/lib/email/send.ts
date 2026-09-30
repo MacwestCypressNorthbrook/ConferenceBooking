@@ -1,5 +1,5 @@
 import "server-only";
-import nodemailer, { type Transporter } from "nodemailer";
+import type { Transporter } from "nodemailer";
 
 export type Email = {
   to: string | string[];
@@ -22,7 +22,10 @@ export function emailProvider(): EmailProvider {
 const from = () => process.env.EMAIL_FROM ?? "Space Booking <onboarding@resend.dev>";
 
 let smtp: Transporter | undefined;
-function smtpTransport() {
+// Loaded lazily: nodemailer needs Node networking, which the Resend path (and
+// Cloudflare Workers) should never have to load.
+async function smtpTransport() {
+  const { default: nodemailer } = await import("nodemailer");
   const port = Number(process.env.SMTP_PORT ?? 587);
   smtp ??= nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -67,7 +70,7 @@ export async function sendEmail(email: Email): Promise<boolean> {
         await sendWithResend(email);
         break;
       case "smtp":
-        await smtpTransport().sendMail({ from: from(), ...email, to });
+        await (await smtpTransport()).sendMail({ from: from(), ...email, to });
         break;
       case "console":
         console.info(`[email:not-configured] to=${to} subject="${email.subject}"\n${email.text}`);

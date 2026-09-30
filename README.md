@@ -25,6 +25,24 @@ With neither Resend nor SMTP configured, emails are printed to the server consol
 - Opening days and hours, duration limits, the booking window, capacity, no past bookings, the optional email-domain allowlist, and per-email rate limits (3 pending requests, 10 per day) all apply to every write, including the server's.
 - The anonymous role has no access to `bookings`. Only admins can read bookings and profiles, and non-admin accounts see a "no access" page.
 
+## Deploy to Cloudflare Workers
+
+The repo is set up for [OpenNext on Cloudflare](https://opennext.js.org/cloudflare) (`wrangler.jsonc`, `open-next.config.ts`).
+
+**Workers Builds settings** (*Worker → Settings → Build*):
+- Build command: `bunx opennextjs-cloudflare build`
+- Deploy command: `bunx opennextjs-cloudflare deploy`
+- **Build variables** (inlined at build time): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+
+**Runtime variables** (*Worker → Settings → Variables and Secrets*):
+- Secrets: `SUPABASE_SECRET_KEY`, `RESEND_API_KEY`
+- Text: `EMAIL_FROM`, `APP_URL` (the live address, e.g. `https://conferencebooking.<you>.workers.dev`)
+
+The Worker name in `wrangler.jsonc` (`conferencebooking`) must match the Worker in Cloudflare, including the `WORKER_SELF_REFERENCE` service binding.
+Use Resend on Cloudflare: Workers don't support nodemailer's SMTP sockets reliably.
+
+Local check in the real Workers runtime: `bun run preview`.
+
 ## Scripts
 
 ```bash

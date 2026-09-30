@@ -1,0 +1,12 @@
+# Never upload local secrets or machine-specific files with `vercel deploy`.
+.env
+.env.*
+!.env.example
+.dev.vars*
+.agents
+.claude
+.open-next
+.wrangler
+.next
+node_modules
+designs

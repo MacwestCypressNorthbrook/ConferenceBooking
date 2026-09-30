@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Room 401 Admin — Boardroom Orion Approvals</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#bec6e0",
+            "on-tertiary-container": "#69d6c9",
+            "inverse-surface": "#213145",
+            "surface-dim": "#cbdbf5",
+            "on-primary-fixed-variant": "#372abf",
+            "on-surface": "#0b1c30",
+            "on-secondary-container": "#5c647a",
+            "on-primary-fixed": "#100069",
+            "on-primary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#dce9ff",
+            "surface-container": "#e5eeff",
+            "surface-container-highest": "#d3e4fe",
+            "tertiary-container": "#005c54",
+            "outline-variant": "#c7c4d7",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "surface-tint": "#5148d7",
+            "secondary-fixed": "#dae2fd",
+            "primary-fixed-dim": "#c3c0ff",
+            "on-background": "#0b1c30",
+            "primary-fixed": "#e3dfff",
+            "surface-container-low": "#eff4ff",
+            "surface-bright": "#f8f9ff",
+            "surface": "#f8f9ff",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#dae2fd",
+            "tertiary-fixed-dim": "#6bd8cb",
+            "primary": "#2a14b4",
+            "on-tertiary-fixed-variant": "#005049",
+            "error": "#ba1a1a",
+            "on-secondary-fixed": "#131b2e",
+            "tertiary": "#00423c",
+            "outline": "#777586",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-primary-container": "#c1beff",
+            "inverse-on-surface": "#eaf1ff",
+            "background": "#f8f9ff",
+            "inverse-primary": "#c3c0ff",
+            "secondary": "#565e74",
+            "surface-variant": "#d3e4fe",
+            "on-surface-variant": "#464554",
+            "on-tertiary-fixed": "#00201d",
+            "tertiary-fixed": "#89f5e7",
+            "primary-container": "#4338ca"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline-xl": ["Geist", "sans-serif"],
+            "headline-lg": ["Geist", "sans-serif"],
+            "headline-md": ["Geist", "sans-serif"],
+            "body-lg": ["Geist", "sans-serif"],
+            "body-md": ["Geist", "sans-serif"],
+            "body-sm": ["Geist", "sans-serif"],
+            "interactive-md": ["Geist", "sans-serif"],
+            "interactive-sm": ["Geist", "sans-serif"],
+            "label-md": ["JetBrains Mono", "monospace"],
+            "label-sm": ["JetBrains Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary selection:text-on-primary">
+<!-- ================= TOP APP BAR ================= -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant shadow-sm">
+<div class="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 h-16">
+<!-- Brand & Managed Room Focus -->
+<div class="flex items-center gap-3 sm:gap-4">
+<div class="h-10 w-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary shadow-xs">
+<span class="material-symbols-outlined text-2xl" data-icon="meeting_room">meeting_room</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-base sm:text-lg font-bold text-on-surface tracking-tight">Boardroom Orion</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
+            Room 401 • Floor 4
+          </span>
+</div>
+<p class="text-xs text-secondary font-medium">Single Room Administration • Today is Thursday, Oct 24</p>
+</div>
+</div>
+<!-- Quick Status & Admin Profile -->
+<div class="flex items-center gap-3">
+<!-- Live Room Status Tag -->
+<div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-medium">
+<span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        Available until 1:30 PM
+      </div>
+<!-- User / Help Contact -->
+<div class="h-6 w-px bg-outline-variant hidden sm:block"></div>
+<div class="flex items-center gap-2.5">
+<div class="h-9 w-9 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden flex-shrink-0">
+<img alt="Admin Coordinator" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNJmStE7fucvFvy7_fSdwQhUI5KKnf53AMy4dGR-uukiA8iuW4MvQgCD8VJf70kVU3-vT9hm0f47g7uMisgcmhi3mqr1QMN3vW6ebSjziyKnv7w2mwkQxGakTf53FiVDBHXqq-QyWvQiKZzz7by0SOZus9Kvdwq_4vw4fi26URDFOurZHAlCHE-YrXcXi5TXCcdScFEeM7ptkOGrdkiAj7rZW9Si_iezHfq9ufbfB8YPtnh2MQIedl"/>
+</div>
+<div class="hidden sm:block text-left">
+<p class="text-xs font-semibold text-on-surface leading-tight">Clara Morris</p>
+<p class="text-[11px] text-secondary">Front Desk Admin</p>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ================= MAIN LAYOUT ================= -->
+<div class="flex-1 flex max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 gap-6">
+<!-- ================= SIMPLE LEFT SIDEBAR ================= -->
+<aside class="hidden lg:flex w-60 flex-col justify-between shrink-0 space-y-6">
+<div class="space-y-4">
+<div class="text-xs font-bold uppercase tracking-wider text-secondary px-2">Navigation</div>
+<nav class="space-y-1.5">
+<!-- Active Approvals Tab -->
+<a class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-primary text-on-primary font-medium text-sm shadow-xs transition-colors" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-lg" data-icon="task_alt">task_alt</span>
+<span>Requests to Review</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-white text-primary text-xs font-bold">3</span>
+</a>
+<!-- Schedule Tab -->
+<a class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-secondary hover:text-on-surface hover:bg-surface-container transition-colors text-sm font-medium" href="#today-schedule">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-lg" data-icon="calendar_today">calendar_today</span>
+<span>Today's Schedule</span>
+</div>
+<span class="text-xs text-secondary font-semibold">4 meetings</span>
+</a>
+</nav>
+</div>
+<!-- Friendly Assistance Card -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant space-y-3">
+<div class="flex items-center gap-2 text-primary font-semibold text-sm">
+<span class="material-symbols-outlined text-lg" data-icon="support_agent">support_agent</span>
+<span>Need Help?</span>
+</div>
+<p class="text-xs text-secondary leading-relaxed">
+        Questions about reservations or room setup? Reach Facilities Support anytime.
+      </p>
+<div class="pt-1 border-t border-outline-variant/60 flex flex-col gap-1.5 text-xs text-on-surface">
+<div class="flex items-center gap-1.5 font-medium">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="call">call</span>
+<span>Ext. 4099 (Front Desk)</span>
+</div>
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-sm" data-icon="chat">chat</span>
+<span>facilities-help@company.com</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- ================= CANVAS CONTENT AREA ================= -->
+<main class="flex-1 min-w-0 space-y-6">
+<!-- 1. GLANCEABLE SUMMARY STATS -->
+<section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<!-- Card 1: Pending Approvals -->
+<div class="p-4 sm:p-5 rounded-2xl bg-amber-50/70 border border-amber-200/90 shadow-xs flex items-center gap-4">
+<div class="h-12 w-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700 shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="pending_actions">pending_actions</span>
+</div>
+<div>
+<span class="text-xs font-semibold uppercase tracking-wider text-amber-900">Needs Attention</span>
+<div class="text-2xl font-bold text-on-surface mt-0.5">3 Pending</div>
+<p class="text-xs text-secondary">1 with schedule overlap</p>
+</div>
+</div>
+<!-- Card 2: Confirmed Today -->
+<div class="p-4 sm:p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant shadow-xs flex items-center gap-4">
+<div class="h-12 w-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="event_available">event_available</span>
+</div>
+<div>
+<span class="text-xs font-semibold uppercase tracking-wider text-secondary">Today's Bookings</span>
+<div class="text-2xl font-bold text-on-surface mt-0.5">4 Confirmed</div>
+<p class="text-xs text-secondary">Total 5.5 hours booked</p>
+</div>
+</div>
+<!-- Card 3: Room Availability Right Now -->
+<div class="p-4 sm:p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200/90 shadow-xs flex items-center gap-4">
+<div class="h-12 w-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700 shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<span class="text-xs font-semibold uppercase tracking-wider text-emerald-900">Current Room Status</span>
+<div class="text-xl sm:text-2xl font-bold text-emerald-900 mt-0.5">Available Now</div>
+<p class="text-xs text-emerald-700">Free until 1:30 PM today</p>
+</div>
+</div>
+</section>
+<!-- 2. MAIN PURPOSE: REQUESTS WAITING FOR APPROVAL -->
+<section class="space-y-4">
+<div class="flex items-center justify-between pb-1 border-b border-outline-variant">
+<div>
+<h1 class="text-xl font-bold text-on-surface tracking-tight">Requests Waiting for Your Approval</h1>
+<p class="text-sm text-secondary mt-0.5">Review each reservation and easily click Approve or Decline.</p>
+</div>
+<span class="px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-semibold border border-amber-200">
+          3 Requests Pending
+        </span>
+</div>
+<!-- REQUEST 1: WITH CLEAR CONFLICT WARNING -->
+<div class="rounded-2xl border-2 border-amber-300 bg-surface-container-lowest p-5 sm:p-6 shadow-sm space-y-4">
+<!-- Friendly Amber Overlap Banner -->
+<div class="rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-amber-600 text-xl shrink-0 mt-0.5" data-icon="warning">warning</span>
+<div class="text-sm flex-1">
+<span class="font-bold text-amber-900">Schedule Overlap Alert:</span>
+<span class="text-amber-800"> This request overlaps with <strong>Marketing Team Sync</strong> (scheduled 1:30 PM – 2:00 PM).</span>
+<div class="text-xs text-amber-700 font-medium mt-1">💡 Helpful suggestion: Suggest 3:00 PM today when Orion is open, or reject to keep the current booking.</div>
+</div>
+</div>
+<!-- Requester & Meeting Overview -->
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="h-12 w-12 rounded-full border border-outline-variant overflow-hidden shrink-0">
+<img alt="Elena Rostova" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB61TKur5EHLrz8BiKDwbMmYs0EIRHUjdgLUfXfbO2ixCqMSYWx8vfe1-2I_s9rVjdnVlTqluOUVxPMTbqx2nT14hv7QYFGvaVN6qgiNH852YaVStwaFhzZx_t3n03v8UiLzVAZxlPByNagDe8U20ljmR6H6NoO4vOykBJlneCCXtfSMIeb99Y6jpY_wHclj5kkNCfMIsnXXC7_bREtUXNyUQUHQt8GMPC-HsqTKpWkhXr6IPN54xb"/>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-base font-bold text-on-surface">Elena Rostova</span>
+<span class="text-xs px-2 py-0.5 rounded bg-surface-container text-secondary font-medium">Product Team</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-red-50 text-red-700 border border-red-200 font-semibold">Has Overlap</span>
+</div>
+<!-- Big Clear Date & Time Format -->
+<div class="mt-2 text-sm font-semibold text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="schedule">schedule</span>
+                Today, Oct 24 • 1:30 PM - 3:00 PM (1 hr 30 min)
+              </div>
+<div class="text-xs text-secondary mt-1 flex items-center gap-2">
+<span>👥 14 Attendees</span>
+<span>•</span>
+<span>Needs 4K Screen &amp; Video Call</span>
+</div>
+</div>
+</div>
+<!-- Direct Big Friendly Action Buttons -->
+<div class="flex items-center gap-2 self-start sm:self-center shrink-0 pt-2 sm:pt-0">
+<button class="px-3 py-2 text-xs font-semibold text-secondary hover:text-on-surface hover:bg-surface-container rounded-xl transition-colors">
+              Suggest New Time
+            </button>
+<button class="px-3.5 py-2 text-sm font-semibold bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 rounded-xl transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+              Decline
+            </button>
+<button class="px-4 py-2 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+              Approve
+            </button>
+</div>
+</div>
+<!-- Plain English Purpose -->
+<div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/60 text-sm">
+<span class="font-semibold text-on-surface">Meeting Purpose:</span>
+<span class="text-secondary ml-1">"Q4 Board Review dry-run with executive stakeholders. Needs projection screens and video dial-in."</span>
+</div>
+</div>
+<!-- REQUEST 2: CLEAN NO-CONFLICT REQUEST -->
+<div class="rounded-2xl border border-outline-variant bg-surface-container-lowest p-5 sm:p-6 shadow-sm space-y-4 hover:border-primary/40 transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="h-12 w-12 rounded-full border border-outline-variant overflow-hidden shrink-0">
+<img alt="Tariq Thorne" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSJFFJWpfN1HiOjgSD6LibsMrdsQoyTZaoy5lNWgFA0DFC29UV1U436YEGD3wdcg_J7YVtuGB3x-dDPR_aZGrIoqtKM8bg-uqrihR8Z3x9JJ_LmLEdz1j_HM3seqzPRoPN4SPfdY2LCLDgZKEQZ-jBp7NNZjDXVuWRpELPBKWaItcYCJioMlohvDwqFexO_3Upiyxk8saGzfjE5OGfyM-3lerb-__VoqJ8IWVSRk4Z5MefWp_oCtcz"/>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-base font-bold text-on-surface">Tariq Thorne</span>
+<span class="text-xs px-2 py-0.5 rounded bg-surface-container text-secondary font-medium">Engineering</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">Room is Free</span>
+</div>
+<!-- Big Clear Date & Time Format -->
+<div class="mt-2 text-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="schedule">schedule</span>
+                Tomorrow, Oct 25 • 10:00 AM - 11:30 AM (1 hr 30 min)
+              </div>
+<div class="text-xs text-secondary mt-1 flex items-center gap-2">
+<span>👥 6 Attendees</span>
+<span>•</span>
+<span>Whiteboard &amp; Display</span>
+</div>
+</div>
+</div>
+<!-- Direct Big Friendly Action Buttons -->
+<div class="flex items-center gap-2 self-start sm:self-center shrink-0 pt-2 sm:pt-0">
+<button class="px-3 py-2 text-xs font-semibold text-secondary hover:text-on-surface hover:bg-surface-container rounded-xl transition-colors">
+              Suggest New Time
+            </button>
+<button class="px-3.5 py-2 text-sm font-semibold bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 rounded-xl transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+              Decline
+            </button>
+<button class="px-4 py-2 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+              Approve
+            </button>
+</div>
+</div>
+<!-- Plain English Purpose -->
+<div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/60 text-sm">
+<span class="font-semibold text-on-surface">Meeting Purpose:</span>
+<span class="text-secondary ml-1">"Sprint debrief and architecture diagram review on the smart whiteboard."</span>
+</div>
+</div>
+<!-- REQUEST 3: RECRUITING INTERVIEW -->
+<div class="rounded-2xl border border-outline-variant bg-surface-container-lowest p-5 sm:p-6 shadow-sm space-y-4 hover:border-primary/40 transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="h-12 w-12 rounded-full border border-outline-variant overflow-hidden shrink-0">
+<img alt="Sarah Lin" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC34WvTCRTZ5sWaKw_xQY4TOLwKW5L0u40g-u9gtAPa-G4RGMLgvvBuBP1M7eEyYDEVd3nPA2pkAewi0MFPngGy63pD3vrhFisUyNaQ1YWDN0CQOs_DAlFU8vMoWvHMnHkK0f3Ewk7VC3WkjMHLPJLNskCC0hkz9ccJaH_LRPtl9zb1jfwGt8y3WnUh8jV8uoEv3SL-pmjoXXRN_iQHWMI452Iv3DJth1kHw5h4jxCmzWjilZ1wsyO0"/>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-base font-bold text-on-surface">Sarah Lin</span>
+<span class="text-xs px-2 py-0.5 rounded bg-surface-container text-secondary font-medium">Recruiting / HR</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">Room is Free</span>
+</div>
+<!-- Big Clear Date & Time Format -->
+<div class="mt-2 text-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="schedule">schedule</span>
+                Friday, Oct 26 • 2:00 PM - 2:45 PM (45 min)
+              </div>
+<div class="text-xs text-secondary mt-1 flex items-center gap-2">
+<span>👥 2 Attendees</span>
+<span>•</span>
+<span>Confidential Executive Interview</span>
+</div>
+</div>
+</div>
+<!-- Direct Big Friendly Action Buttons -->
+<div class="flex items-center gap-2 self-start sm:self-center shrink-0 pt-2 sm:pt-0">
+<button class="px-3 py-2 text-xs font-semibold text-secondary hover:text-on-surface hover:bg-surface-container rounded-xl transition-colors">
+              Suggest New Time
+            </button>
+<button class="px-3.5 py-2 text-sm font-semibold bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 rounded-xl transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+              Decline
+            </button>
+<button class="px-4 py-2 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+              Approve
+            </button>
+</div>
+</div>
+<!-- Plain English Purpose -->
+<div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/60 text-sm">
+<span class="font-semibold text-on-surface">Meeting Purpose:</span>
+<span class="text-secondary ml-1">"Final candidate interview with VP of Design. Quiet, private atmosphere needed."</span>
+</div>
+</div>
+</section>
+<!-- 3. TODAY'S ROOM SCHEDULE AT A GLANCE (SIMPLE TIMELINE) -->
+<section class="space-y-4 pt-4" id="today-schedule">
+<div class="flex items-center justify-between pb-1 border-b border-outline-variant">
+<div>
+<h2 class="text-lg font-bold text-on-surface">Today's Room Schedule at a Glance</h2>
+<p class="text-sm text-secondary">See who is currently using Boardroom Orion and what is coming up next.</p>
+</div>
+<span class="text-xs font-medium text-secondary">Oct 24, 2024</span>
+</div>
+<div class="rounded-2xl border border-outline-variant bg-surface-container-lowest p-5 space-y-4 shadow-sm">
+<!-- Timeline items -->
+<div class="space-y-3">
+<!-- 9:00 AM Finished -->
+<div class="flex items-center gap-4 p-3 rounded-xl bg-surface-container-low opacity-75">
+<span class="text-xs font-semibold text-secondary w-28 shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-emerald-600" data-icon="check_circle">check_circle</span>
+              9:00 - 10:00 AM
+            </span>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-on-surface truncate">Executive Staff Standup</p>
+<p class="text-xs text-secondary truncate">Organized by David Ross • 8 attendees</p>
+</div>
+<span class="text-xs px-2.5 py-1 rounded-full bg-surface-container text-secondary font-medium shrink-0">
+              Completed
+            </span>
+</div>
+<!-- Currently Free Slot -->
+<div class="flex items-center gap-4 p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200/80">
+<span class="text-xs font-bold text-emerald-800 w-28 shrink-0 flex items-center gap-1">
+<span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              NOW - 1:30 PM
+            </span>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-emerald-900 truncate">Room Available &amp; Cleaned</p>
+<p class="text-xs text-emerald-700 truncate">No meetings currently scheduled</p>
+</div>
+<span class="text-xs px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-semibold shrink-0">
+              Available
+            </span>
+</div>
+<!-- 1:30 PM Confirmed -->
+<div class="flex items-center gap-4 p-3 rounded-xl bg-surface-container-low border border-outline-variant/60">
+<span class="text-xs font-semibold text-on-surface w-28 shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="schedule">schedule</span>
+              1:30 - 2:00 PM
+            </span>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-on-surface truncate">Marketing Team Weekly Sync</p>
+<p class="text-xs text-secondary truncate">Organized by Rachel Green • 6 attendees</p>
+</div>
+<span class="text-xs px-2.5 py-1 rounded-full bg-primary-fixed text-primary font-semibold shrink-0">
+              Confirmed
+            </span>
+</div>
+<!-- 2:00 PM Free -->
+<div class="flex items-center gap-4 p-2.5 rounded-xl bg-surface-container-lowest border border-dashed border-outline-variant">
+<span class="text-xs font-medium text-secondary w-28 shrink-0">2:00 - 3:30 PM</span>
+<div class="flex-1 text-xs text-secondary italic">Open slot (Elena Rostova requested 1:30 - 3:00 PM)</div>
+<span class="text-xs text-secondary font-medium">Free</span>
+</div>
+<!-- 3:30 PM Confirmed -->
+<div class="flex items-center gap-4 p-3 rounded-xl bg-surface-container-low border border-outline-variant/60">
+<span class="text-xs font-semibold text-on-surface w-28 shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="schedule">schedule</span>
+              3:30 - 5:00 PM
+            </span>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-on-surface truncate">Client Presentation: Global Logistics</p>
+<p class="text-xs text-secondary truncate">Organized by Marcus Vance • 12 attendees</p>
+</div>
+<span class="text-xs px-2.5 py-1 rounded-full bg-primary-fixed text-primary font-semibold shrink-0">
+              Confirmed
+            </span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

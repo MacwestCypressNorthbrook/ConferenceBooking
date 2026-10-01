@@ -73,7 +73,7 @@ export async function ScheduleView({
       />
 
       {/* Side by side on wide screens so the week grid sits higher on the page. */}
-      <div className="grid gap-4 xl:grid-cols-[minmax(420px,520px)_minmax(0,1fr)] xl:items-center">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(420px,520px)_minmax(0,1fr)] xl:items-center">
         <SpaceStatus todayBookings={todayBookings} variant="card" />
         <FreeWindows upcoming={upcoming} />
       </div>

@@ -5,6 +5,8 @@ import { bookingIcs } from "./ics";
 import { sendEmail, type Email } from "./send";
 import * as t from "./templates";
 
+const APPROVAL_PLANNING_RECIPIENT = process.env.APPROVAL_PLANNING_RECIPIENT ?? "emmanuella.adu@cypressenergyghana.com.gh";
+
 export type BookingEvent =
   | "created"
   | "approved"
@@ -51,9 +53,14 @@ export async function notifyBooking(event: BookingEvent, bookingId: string, appU
         ]);
         break;
       }
-      case "approved":
-        await toRequester(t.bookingConfirmed(b, ctx), calendar());
+      case "approved": {
+        const planningNotice = t.approvalPlanningNotice(b, ctx);
+        await Promise.all([
+          toRequester(t.bookingConfirmed(b, ctx), calendar()),
+          sendEmail({ to: APPROVAL_PLANNING_RECIPIENT, replyTo: b.requester_email, ...planningNotice, ...calendar() }),
+        ]);
         break;
+      }
       case "declined":
       case "auto_declined":
         await toRequester(t.bookingDeclined(b, ctx, { autoDeclined: event === "auto_declined" }));

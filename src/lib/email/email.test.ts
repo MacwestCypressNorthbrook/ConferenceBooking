@@ -39,6 +39,13 @@ describe("templates", () => {
     expect(t.requestReceived(booking, ctx).html).toContain('href="https://book.example.com/b/tok"');
     expect(t.bookingDeclined(booking, ctx).text).toContain("https://book.example.com/?date=2026-10-05");
   });
+  test("planning notice includes the approver's setup details", () => {
+    const e = t.approvalPlanningNotice({ ...booking, status: "confirmed", needs: ["Projector"] }, ctx);
+    expect(e.subject).toContain("Approved booking:");
+    expect(e.html).toContain("Projector");
+    expect(e.html).toContain("mailto:ada@example.com");
+    expect(e.text).toContain("Please plan the space setup ahead of time.");
+  });
 });
 
 describe("ics", () => {

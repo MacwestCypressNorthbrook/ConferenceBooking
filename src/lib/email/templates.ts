@@ -156,6 +156,25 @@ export function bookingConfirmed(b: Booking, c: Ctx): EmailContent {
   };
 }
 
+/** Planning notice for the person who prepares the space after an approval. */
+export function approvalPlanningNotice(b: Booking, c: Ctx): EmailContent {
+  const w = when(b, c.settings);
+  const heading = "A booking was approved";
+  const intro = `<strong>${esc(b.requester_name)}</strong>${b.requester_department ? ` (${esc(b.requester_department)})` : ""} has an approved booking for ${esc(c.settings.name)}. Please plan the space setup ahead of time.`;
+  const contact = [`<a href="mailto:${esc(b.requester_email)}" style="color:#4338CA">${esc(b.requester_email)}</a>`, b.requester_phone ? esc(b.requester_phone) : ""].filter(Boolean).join("<br>");
+  const rows = detailRows(b, c.settings, [
+    ["Contact", contact],
+    ...(b.needs.length ? [["Setup", esc(b.needs.join(", "))] as [string, string]] : []),
+  ]);
+  const cta = { label: "Open schedule", href: `${c.appUrl}/admin/schedule` };
+  const note = b.purpose ? { label: "Purpose", body: b.purpose } : undefined;
+  return {
+    subject: `Approved booking: ${b.title} · ${w.short}, ${w.range}`,
+    html: layout({ settings: c.settings, preheader: `${w.short}, ${w.range} needs planning`, badge: { label: "Approved", tone: "ok" }, heading, intro, rows, note, cta, footer: `Planning notice from ${esc(c.settings.name)}.` }),
+    text: textVersion(heading, intro, b, c.settings, cta, [`From: ${b.requester_name} <${b.requester_email}>`, note && `Purpose: ${note.body}`].filter(Boolean).join("\n")),
+  };
+}
+
 export function bookingDeclined(b: Booking, c: Ctx, { autoDeclined = false } = {}): EmailContent {
   const heading = autoDeclined ? "That time went to another booking" : "Your request wasn't approved";
   const intro = autoDeclined

@@ -43,6 +43,13 @@ export async function notifyBooking(event: BookingEvent, bookingId: string, appU
     const calendar = () => ({
       attachments: [{ filename: "booking.ics", content: bookingIcs(b, s, manageUrl), contentType: "text/calendar; charset=utf-8" }],
     });
+    const toPlanningRecipient = () =>
+      sendEmail({
+        to: APPROVAL_PLANNING_RECIPIENT,
+        replyTo: b.requester_email,
+        ...t.approvalPlanningNotice(b, ctx),
+        ...calendar(),
+      });
 
     switch (event) {
       case "created": {
@@ -50,14 +57,14 @@ export async function notifyBooking(event: BookingEvent, bookingId: string, appU
         await Promise.all([
           b.status === "confirmed" ? toRequester(t.bookingConfirmed(b, ctx), calendar()) : toRequester(t.requestReceived(b, ctx)),
           byAdmin ? null : toAdmins(t.adminNewRequest(b, ctx)),
+          b.status === "confirmed" ? toPlanningRecipient() : null,
         ]);
         break;
       }
       case "approved": {
-        const planningNotice = t.approvalPlanningNotice(b, ctx);
         await Promise.all([
           toRequester(t.bookingConfirmed(b, ctx), calendar()),
-          sendEmail({ to: APPROVAL_PLANNING_RECIPIENT, replyTo: b.requester_email, ...planningNotice, ...calendar() }),
+          toPlanningRecipient(),
         ]);
         break;
       }

@@ -1,6 +1,9 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"main": ".open-next/worker.js",
+	// Custom entry that wraps .open-next/worker.js and adds the cron handler.
+	"main": "worker.ts",
+	// Daily ping so Supabase doesn't pause the project after 7 idle days.
+	"triggers": { "crons": ["0 6 * * *"] },
 	// Must match the Worker name in Cloudflare (Workers & Pages → your project).
 	"name": "conferencebooking",
 	"compatibility_date": "2026-09-30",

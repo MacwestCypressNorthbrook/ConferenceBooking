@@ -3,10 +3,16 @@ import { createAdminClient } from "@/lib/supabase/admin";
 
 /**
  * Touches the database so Supabase's free tier doesn't pause the project for
- * inactivity. Called daily by the Worker cron in `worker.ts`; safe to hit by
- * hand. Reads one tiny row and returns nothing sensitive.
+ * inactivity. Called daily by Vercel Cron (`vercel.json`). Reads one tiny row
+ * and returns nothing sensitive. If CRON_SECRET is set, Vercel sends it as a
+ * bearer token and other callers are rejected.
  */
-export async function GET() {
+export async function GET(request: Request) {
+  const secret = process.env.CRON_SECRET;
+  if (secret && request.headers.get("authorization") !== `Bearer ${secret}`) {
+    return NextResponse.json({ ok: false }, { status: 401 });
+  }
+
   const { error } = await createAdminClient().from("space_settings").select("id").limit(1);
 
   if (error) {
